@@ -1,9 +1,12 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { daysSince } = require("../lastFunny.json");
+const { getJsonFile } = require("../utils");
 
 module.exports = {
-  data: new SlashCommandBuilder().setName("howmanydays").setDescription("Shows how many days since funny"),
-  async execute(interaction) {
-    await interaction.reply(`${daysSince} days`);
-  }
-}
+    data: new SlashCommandBuilder()
+        .setName("howmanydays")
+        .setDescription("Shows how many days since funny"),
+    async execute(interaction) {
+        const { daysSince } = await getJsonFile();
+        await interaction.reply(`${daysSince} days`);
+    },
+};
