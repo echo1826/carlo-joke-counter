@@ -7,6 +7,8 @@ module.exports = {
         .setDescription("Shows how many days since funny"),
     async execute(interaction) {
         const { daysSince } = await getJsonFile();
-        await interaction.reply(`${daysSince} days`);
+        await interaction.reply(
+            `${daysSince} ${daysSince === 1 ? "day" : "days"} since Carlos made a funny`
+        );
     },
 };
