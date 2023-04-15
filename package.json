@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/echo1826/zen-bot#readme",
   "dependencies": {
-    "discord.js": "^13.5.1",
+    "discord.js": "^14.9.0",
     "dotenv": "^10.0.0"
   }
 }
