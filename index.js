@@ -3,7 +3,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 const token = process.env.BOT_TOKEN;
-
+const { getJsonFile, updateJsonFile } = require("./utils");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
@@ -62,3 +62,9 @@ client.once(Events.ClientReady, (c) => {
 });
 
 client.login(token);
+
+setInterval(async () => {
+    const data = await getJsonFile();
+    data.daysSince++;
+    await updateJsonFile(data);
+}, 24 * 60 * 60 * 1000);
