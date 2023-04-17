@@ -66,5 +66,7 @@ client.login(token);
 setInterval(async () => {
     const data = await getJsonFile();
     data.daysSince++;
+    data.longestStreak = Math.max(data.longestStreak, data.daysSince);
+    data.shortestStreak = Math.min(data.shortestStreak, data.daysSince);
     await updateJsonFile(data);
 }, 24 * 60 * 60 * 1000);

@@ -1,6 +1,4 @@
 const { SlashCommandBuilder } = require("discord.js");
-// const { daysSince } = require("../lastFunny.json");
-const fs = require("node:fs");
 const { getJsonFile, updateJsonFile } = require("../utils");
 
 // async function getJsonFile() {
@@ -16,7 +14,7 @@ const { getJsonFile, updateJsonFile } = require("../utils");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("carlosmadeafunny")
-        .setDescription("Shows how many days since funny"),
+        .setDescription("Resets Carlos's joke counter"),
     async execute(interaction) {
         let lastFunnyJson = await getJsonFile();
         lastFunnyJson.daysSince = 0;
