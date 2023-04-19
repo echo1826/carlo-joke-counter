@@ -4,6 +4,7 @@ const path = require("node:path");
 const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 const token = process.env.BOT_TOKEN;
 const { getJsonFile, updateJsonFile } = require("./utils");
+const dayjs = require('dayjs');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
@@ -63,7 +64,13 @@ client.once(Events.ClientReady, (c) => {
 
 client.login(token);
 
+let pastDate = dayjs(Date.now()).format("M/DD/YYYY");
+
 setInterval(async () => {
+    let currentDate = dayjs(Date.now()).format("M/DD/YYYY");
+    if(pastDate === currentDate) return;
+    pastDate = currentDate;
+    console.log(pastDate);
     const data = await getJsonFile();
     data.daysSince++;
     data.longestStreak = Math.max(data.longestStreak, data.daysSince);
@@ -72,7 +79,6 @@ setInterval(async () => {
     } else {
         data.shortestStreak = Math.min(data.shortestStreak, data.daysSince);
     }
-    
     console.log(data);
     await updateJsonFile(data);
-}, 24 * 60 * 60 * 1000);
+}, 4 * 60 * 60 * 1000);
