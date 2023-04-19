@@ -27,9 +27,20 @@ for (const file of commandFiles) {
     }
 }
 
+const carlosRole = "1096687902433476620";
+
+
 client.on(Events.InteractionCreate, async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
     console.log(interaction);
+
+    for(let role of interaction.member._roles) {
+        if(role === carlosRole) {
+            await interaction.reply("KINO!")
+            return;
+        }
+    }
+    
 
     const command = interaction.client.commands.get(interaction.commandName);
 
