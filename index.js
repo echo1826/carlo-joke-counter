@@ -67,6 +67,12 @@ setInterval(async () => {
     const data = await getJsonFile();
     data.daysSince++;
     data.longestStreak = Math.max(data.longestStreak, data.daysSince);
-    data.shortestStreak = Math.min(data.shortestStreak, data.daysSince);
+    if(data.shortestStreak === data.longestStreak) {
+        data.shortestStreak = Math.min(data.longestStreak, data.daysSince);
+    } else {
+        data.shortestStreak = Math.min(data.shortestStreak, data.daysSince);
+    }
+    
+    console.log(data);
     await updateJsonFile(data);
 }, 24 * 60 * 60 * 1000);
